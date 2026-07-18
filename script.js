@@ -12,6 +12,7 @@ window.startAdventure = function(){
     .getElementById("opening")
     .classList.add("hidden");
 
+
     document
     .getElementById("question")
     .classList.remove("hidden");
@@ -20,11 +21,14 @@ window.startAdventure = function(){
 
 
 
+
+
 window.yesClicked = function(){
 
     document
     .getElementById("question")
     .classList.add("hidden");
+
 
     document
     .getElementById("adventure")
@@ -36,14 +40,14 @@ window.yesClicked = function(){
 
 
 
+
 // NO BUTTON
-
-let noCount = 0;
-
 
 document.addEventListener("DOMContentLoaded", function(){
 
-    const noButton = document.getElementById("noButton");
+
+    const noButton =
+    document.getElementById("noButton");
 
 
     if(noButton){
@@ -104,8 +108,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 
-// ADVENTURE PLANS
 
+// ADVENTURE PLANS
 
 const plans = {
 
@@ -155,6 +159,7 @@ night:[
 
 
 };
+
 
 
 
@@ -253,6 +258,8 @@ window.openPlans = function(type){
 
 
 
+
+
 window.goToDate = function(){
 
 
@@ -267,6 +274,7 @@ window.goToDate = function(){
 
 
 };
+
 
 
 
@@ -306,6 +314,7 @@ window.continueToTime = function(){
 
 
 };
+
 
 
 
@@ -356,6 +365,7 @@ window.chooseTime = function(time){
 
 
 
+
 window.downloadCalendar = function(){
 
 
@@ -363,6 +373,7 @@ window.downloadCalendar = function(){
 
 
 };
+
 
 
 
