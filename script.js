@@ -475,4 +475,4 @@ window.confirmAdventure = function(){
 
 };
 
-alert("script is running");
+alert
