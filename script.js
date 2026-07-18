@@ -1,5 +1,3 @@
-alert("script loaded");
-
 let chosenPlans = [];
 let chosenDate = "";
 let chosenTime = "";
@@ -370,9 +368,102 @@ window.chooseTime = function(time){
 
 window.downloadCalendar = function(){
 
+    if(!chosenDate || !chosenTime){
+
+        alert("Choose a date and time first ♡");
+        return;
+
+    }
+
+
+    let date = chosenDate.replaceAll("-", "");
+
+
+    let timeMatch = chosenTime.match(/(\d+):(\d+)\s(AM|PM)/);
+
+
+    let hour = parseInt(timeMatch[1]);
+    let minute = parseInt(timeMatch[2]);
+
+
+    if(timeMatch[3] === "PM" && hour !== 12){
+
+        hour += 12;
+
+    }
+
+
+    if(timeMatch[3] === "AM" && hour === 12){
+
+        hour = 0;
+
+    }
+
+
+    let start =
+    date +
+    "T" +
+    String(hour).padStart(2,"0") +
+    String(minute).padStart(2,"0") +
+    "00";
+
+
+    let end =
+    date +
+    "T" +
+    String(hour + 1).padStart(2,"0") +
+    String(minute).padStart(2,"0") +
+    "00";
+
+
+
+    let calendar =
+
+`BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:Our Little Adventure ♡
+DESCRIPTION:${chosenPlans.join(", ")}
+DTSTART:${start}
+DTEND:${end}
+END:VEVENT
+END:VCALENDAR`;
+
+
+
+    let blob = new Blob(
+        [calendar],
+        {
+            type:"text/calendar;charset=utf-8"
+        }
+    );
+
+
+    let url =
+    URL.createObjectURL(blob);
+
+
+    let link =
+    document.createElement("a");
+
+
+    link.href = url;
+
+
+    link.download =
+    "our-little-adventure.ics";
+
+
+    document.body.appendChild(link);
+
+
+    link.click();
+
+
+    document.body.removeChild(link);
+
 
     alert("Calendar saved ♡");
-
 
 };
 
