@@ -192,7 +192,83 @@ window.chooseTime = function(time){
 
 window.downloadCalendar = function(){
 
-alert("Calendar saved ♡");
+    // Convert date YYYY-MM-DD into YYYYMMDD
+    let calendarDate = chosenDate.replaceAll("-", "");
+
+
+    // Convert time like 8:00 PM into 24 hour time
+    let hour = 0;
+    let minute = 0;
+
+    let timeParts = chosenTime.match(/(\d+):(\d+)\s(AM|PM)/);
+
+
+    if(timeParts){
+
+        hour = parseInt(timeParts[1]);
+        minute = parseInt(timeParts[2]);
+
+        let period = timeParts[3];
+
+
+        if(period === "PM" && hour !== 12){
+
+            hour += 12;
+
+        }
+
+
+        if(period === "AM" && hour === 12){
+
+            hour = 0;
+
+        }
+
+    }
+
+
+    let calendarTime =
+    String(hour).padStart(2,"0") +
+    String(minute).padStart(2,"0") +
+    "00";
+
+
+
+    let event =
+
+`BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:Our Little Adventure ♡
+DESCRIPTION:${chosenPlans.join(", ")}
+DTSTART:${calendarDate}T${calendarTime}
+DTEND:${calendarDate}T${calendarTime}
+END:VEVENT
+END:VCALENDAR`;
+
+
+
+    let blob = new Blob(
+        [event],
+        {
+            type:"text/calendar"
+        }
+    );
+
+
+    let link =
+    document.createElement("a");
+
+
+    link.href =
+    URL.createObjectURL(blob);
+
+
+    link.download =
+    "little-adventure.ics";
+
+
+    link.click();
 
 };
 
