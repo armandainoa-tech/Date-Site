@@ -365,99 +365,14 @@ window.chooseTime = function(time){
 
 
 
-
 window.downloadCalendar = function(){
 
-    if(!chosenDate || !chosenTime){
-
-        alert("Choose a date and time first ♡");
-        return;
-
-    }
-
-
-    let dateParts = chosenDate.split("-");
-
-    let year = dateParts[0];
-    let month = dateParts[1];
-    let day = dateParts[2];
-
-
-    let timeMatch = chosenTime.match(/(\d+):(\d+)\s(AM|PM)/);
-
-
-    let hour = parseInt(timeMatch[1]);
-    let minute = parseInt(timeMatch[2]);
-
-
-    if(timeMatch[3] === "PM" && hour !== 12){
-
-        hour += 12;
-
-    }
-
-
-    if(timeMatch[3] === "AM" && hour === 12){
-
-        hour = 0;
-
-    }
-
-
-    let startTime =
-    year +
-    month +
-    day +
-    "T" +
-    String(hour).padStart(2,"0") +
-    String(minute).padStart(2,"0") +
-    "00";
-
-
-    let endHour = hour + 1;
-
-
-    let endTime =
-    year +
-    month +
-    day +
-    "T" +
-    String(endHour).padStart(2,"0") +
-    String(minute).padStart(2,"0") +
-    "00";
-
-
-
-    let event =
-
-`BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//A Little Adventure//EN
-BEGIN:VEVENT
-UID:${Date.now()}@littleadventure
-DTSTAMP:${startTime}
-DTSTART:${startTime}
-DTEND:${endTime}
-SUMMARY:Our Little Adventure ♡
-DESCRIPTION:${chosenPlans.join(", ")}
-END:VEVENT
-END:VCALENDAR`;
-
-
-
-    let blob = new Blob(
-        [event],
-        {
-            type:"text/calendar;charset=utf-8"
-        }
+    alert(
+        "Calendar button is working ♡\n\n" +
+        "Date: " + chosenDate + "\n" +
+        "Time: " + chosenTime + "\n" +
+        "Plans: " + chosenPlans.join(", ")
     );
-
-
-    let url =
-    URL.createObjectURL(blob);
-
-
-    window.location.href = url;
 
 };
 
