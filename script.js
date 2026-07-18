@@ -192,37 +192,31 @@ window.chooseTime = function(time){
 
 window.downloadCalendar = function(){
 
-    // Convert date YYYY-MM-DD into YYYYMMDD
-    let calendarDate = chosenDate.replaceAll("-", "");
+    let dateParts = chosenDate.split("-");
+
+    let calendarDate =
+    dateParts[0] +
+    dateParts[1] +
+    dateParts[2];
 
 
-    // Convert time like 8:00 PM into 24 hour time
-    let hour = 0;
-    let minute = 0;
+    let hour = parseInt(chosenTime.split(":")[0]);
 
-    let timeParts = chosenTime.match(/(\d+):(\d+)\s(AM|PM)/);
+    let minute = chosenTime.split(":")[1].split(" ")[0];
 
-
-    if(timeParts){
-
-        hour = parseInt(timeParts[1]);
-        minute = parseInt(timeParts[2]);
-
-        let period = timeParts[3];
+    let ampm = chosenTime.includes("PM") ? "PM" : "AM";
 
 
-        if(period === "PM" && hour !== 12){
+    if(ampm === "PM" && hour !== 12){
 
-            hour += 12;
+        hour += 12;
 
-        }
+    }
 
 
-        if(period === "AM" && hour === 12){
+    if(ampm === "AM" && hour === 12){
 
-            hour = 0;
-
-        }
+        hour = 0;
 
     }
 
@@ -256,17 +250,11 @@ END:VCALENDAR`;
     );
 
 
-    let link =
-    document.createElement("a");
+    let link = document.createElement("a");
 
+    link.href = URL.createObjectURL(blob);
 
-    link.href =
-    URL.createObjectURL(blob);
-
-
-    link.download =
-    "little-adventure.ics";
-
+    link.download = "adventure.ics";
 
     link.click();
 
