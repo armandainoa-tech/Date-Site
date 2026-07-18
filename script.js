@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 
-// ADVENTURE PLANS
+// PLANS
 
 const plans = {
 
@@ -253,13 +253,7 @@ window.openPlans = function(type){
 
 };
 
-
-
-
-
-
-
-
+// DATE PICKER
 
 window.goToDate = function(){
 
@@ -275,9 +269,6 @@ window.goToDate = function(){
 
 
 };
-
-
-
 
 
 
@@ -321,7 +312,7 @@ window.continueToTime = function(){
 
 
 
-
+// CHOOSE TIME
 
 window.chooseTime = function(time){
 
@@ -384,10 +375,8 @@ window.downloadCalendar = function(){
     chosenTime.match(/(\d+):(\d+)\s(AM|PM)/);
 
 
-
     let hour =
     parseInt(match[1],10);
-
 
 
     const minute =
@@ -426,9 +415,8 @@ window.downloadCalendar = function(){
     new Date(start);
 
 
-
     end.setHours(
-        end.getHours()+1
+        end.getHours() + 1
     );
 
 
@@ -442,7 +430,6 @@ window.downloadCalendar = function(){
         .split(".")[0]+"Z";
 
     }
-
 
 
 
@@ -514,6 +501,7 @@ END:VCALENDAR`;
 
 
 
+
 // CONFIRM ADVENTURE + EMAILJS
 
 window.confirmAdventure = function(){
@@ -523,7 +511,7 @@ window.confirmAdventure = function(){
 
 
         message:
-        "HE SAID YES!! 🌸",
+        "Your little adventure was accepted ♡",
 
 
         date:
@@ -534,15 +522,18 @@ window.confirmAdventure = function(){
         chosenTime,
 
 
-        adventureTime:
-        chosenTime,
-
-
         plans:
         chosenPlans.join(", ")
 
 
     };
+
+
+
+    console.log(
+        "Adventure data:",
+        adventureData
+    );
 
 
 
@@ -563,6 +554,12 @@ window.confirmAdventure = function(){
 
     // EMAILJS SEND
 
+    console.log(
+        "Sending email..."
+    );
+
+
+
     emailjs.send(
 
         "service_msyya77",
@@ -574,27 +571,41 @@ window.confirmAdventure = function(){
     )
 
 
-    .then(function(){
+
+    .then(function(response){
 
 
         console.log(
-            "Email sent successfully 💗"
+            "EMAIL SENT SUCCESSFULLY:",
+            response
+        );
+
+
+        alert(
+            "Adventure confirmed 💗✨"
         );
 
 
     })
 
 
+
     .catch(function(error){
 
 
-        console.log(
-            "Email failed:",
+        console.error(
+            "EMAIL FAILED:",
             error
         );
 
 
+        alert(
+            "Email failed - check console"
+        );
+
+
     });
+
 
 
 
@@ -611,10 +622,14 @@ window.confirmAdventure = function(){
     .getElementById("acceptedPage")
     .classList.remove("hidden");
 
+
 };
 
 
 
 
 
-console.log("Date Site script running 💗");
+console.log(
+    "Date Site script running 💗"
+);
+
