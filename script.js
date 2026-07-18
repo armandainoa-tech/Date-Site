@@ -1,3 +1,5 @@
+alert("script loaded");
+
 let chosenPlans = [];
 let chosenDate = "";
 let chosenTime = "";
