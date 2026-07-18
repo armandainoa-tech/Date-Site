@@ -1,0 +1,681 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Patrick+Hand&display=swap');
+
+
+* {
+    box-sizing:border-box;
+}
+
+
+
+body {
+
+    margin:0;
+
+    width:100%;
+
+    height:100vh;
+
+    overflow:hidden;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-family:"Patrick Hand", cursive;
+
+    background:
+    linear-gradient(
+        180deg,
+        #b9d8c1,
+        #f7d9c6
+    );
+
+}
+
+
+
+
+.scene {
+
+    width:100%;
+
+    height:100%;
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+
+
+.screen {
+
+    text-align:center;
+
+    animation:fadeIn .8s ease;
+
+}
+
+
+
+.hidden {
+
+    display:none !important;
+
+}
+
+
+
+
+
+.card {
+
+    width:90%;
+
+    max-width:560px;
+
+    padding:45px;
+
+    background:
+
+    rgba(255,248,230,.92);
+
+    border-radius:45px;
+
+    box-shadow:
+
+    0 25px 60px rgba(0,0,0,.18);
+
+    backdrop-filter:blur(8px);
+
+}
+
+
+
+
+
+h1,
+h2 {
+
+    font-family:"Caveat", cursive;
+
+    color:#4c5845;
+
+}
+
+
+
+h1 {
+
+    font-size:58px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+h2 {
+
+    font-size:38px;
+
+}
+
+
+
+p {
+
+    font-size:26px;
+
+    color:#59604d;
+
+}
+
+
+
+
+
+
+
+button {
+
+    font-family:"Patrick Hand", cursive;
+
+    font-size:24px;
+
+    padding:14px 30px;
+
+    margin:8px;
+
+    border:none;
+
+    border-radius:40px;
+
+    background:#fff0cf;
+
+    color:#4c5845;
+
+    cursor:pointer;
+
+    box-shadow:
+
+    0 8px 18px rgba(0,0,0,.15);
+
+    transition:.25s ease;
+
+}
+
+
+
+button:hover {
+
+    transform:
+
+    translateY(-5px)
+    scale(1.05);
+
+}
+
+
+
+
+
+
+
+.buttons {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:40px;
+
+    min-height:120px;
+
+    position:relative;
+
+}
+
+
+
+.yes {
+
+    background:#d7ebc8;
+
+}
+
+
+
+#noButton {
+
+    background:#cfe8ef;
+
+    z-index:10;
+
+}
+
+
+
+
+
+
+
+.choices {
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+.choices button {
+
+    width:100%;
+
+}
+
+
+
+.selected {
+
+    background:#d6edc7;
+
+    transform:scale(1.05);
+
+}
+
+
+
+
+
+
+
+input[type="date"] {
+
+    font-family:"Patrick Hand", cursive;
+
+    font-size:24px;
+
+    padding:15px 25px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#fff0cf;
+
+}
+
+
+
+
+
+
+
+.final-card {
+
+    position:relative;
+
+}
+
+
+
+.lanterns {
+
+    font-size:45px;
+
+    animation:float 4s infinite;
+
+}
+
+
+
+.story-text {
+
+    font-style:italic;
+
+}
+
+
+
+.invitation-paper {
+
+    padding:25px;
+
+    margin:25px 0;
+
+    border-radius:30px;
+
+    background:
+
+    rgba(255,255,255,.45);
+
+    border:
+
+    2px dashed #c9b58a;
+
+}
+
+
+
+.ending-message {
+
+    font-size:30px;
+
+}
+
+
+
+
+
+/* NEW ACCEPTED ENDING */
+
+.celebration {
+
+    font-size:45px;
+
+    animation:float 2s infinite;
+
+}
+
+
+
+#acceptedPage {
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+#acceptedPage .card {
+
+    animation:popIn .8s ease;
+
+}
+
+
+
+
+
+
+
+/* FIREFLIES */
+
+.fireflies {
+
+    position:absolute;
+
+    width:100%;
+
+    height:100%;
+
+    pointer-events:none;
+
+}
+
+
+
+.fireflies span {
+
+    position:absolute;
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:#fff5ad;
+
+    animation:fly 8s infinite;
+
+}
+
+
+
+.fireflies span:nth-child(1){
+
+left:10%;
+
+top:80%;
+
+}
+
+
+.fireflies span:nth-child(2){
+
+left:25%;
+
+top:50%;
+
+animation-delay:2s;
+
+}
+
+
+.fireflies span:nth-child(3){
+
+left:45%;
+
+top:75%;
+
+animation-delay:4s;
+
+}
+
+
+.fireflies span:nth-child(4){
+
+left:70%;
+
+top:35%;
+
+animation-delay:1s;
+
+}
+
+
+.fireflies span:nth-child(5){
+
+left:85%;
+
+top:70%;
+
+animation-delay:3s;
+
+}
+
+
+.fireflies span:nth-child(6){
+
+left:55%;
+
+top:20%;
+
+animation-delay:5s;
+
+}
+
+
+
+
+
+
+
+.sparkles {
+
+    position:absolute;
+
+    font-size:35px;
+
+}
+
+
+
+.sparkles.top {
+
+    top:30px;
+
+}
+
+
+
+.sparkles.bottom {
+
+    bottom:30px;
+
+    right:30px;
+
+}
+
+
+
+
+
+
+
+@keyframes fadeIn {
+
+
+from {
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+
+to {
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+
+@keyframes float {
+
+
+0% {
+
+transform:translateY(0);
+
+}
+
+
+50% {
+
+transform:translateY(-20px);
+
+}
+
+
+100% {
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+
+@keyframes fly {
+
+
+0% {
+
+transform:translateY(0);
+
+opacity:.3;
+
+}
+
+
+50% {
+
+transform:translateY(-120px);
+
+opacity:1;
+
+}
+
+
+100% {
+
+transform:translateY(-250px);
+
+opacity:0;
+
+}
+
+
+}
+
+
+
+
+@keyframes popIn {
+
+
+0% {
+
+transform:scale(.5);
+
+opacity:0;
+
+}
+
+
+100% {
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+
+}
+
+
+
+
+
+
+@media(max-width:600px){
+
+
+.card {
+
+padding:30px;
+
+}
+
+
+
+h1 {
+
+font-size:45px;
+
+}
+
+
+
+h2 {
+
+font-size:32px;
+
+}
+
+
+
+p {
+
+font-size:22px;
+
+}
+
+
+
+button {
+
+font-size:21px;
+
+}
+
+
+}

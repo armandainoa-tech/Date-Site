@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Adventure Updates ♡</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+text-align:center;
+padding:40px;
+background:#fff5fa;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+h1{
+color:#ff7fa8;
+}
+
+#status{
+font-size:20px;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="card">
+
+<h1>🌸 Adventure Updates ♡</h1>
+
+<div id="status">
+Waiting for adventure...
+</div>
+
+</div>
+
+
+
+<script type="module">
+
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+
+
+import {
+
+getFirestore,
+
+doc,
+
+onSnapshot
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBBzTwMmhD1t-gZeX5W35K1aG2okrUo91o",
+
+authDomain: "date-site-bfb53.firebaseapp.com",
+
+projectId: "date-site-bfb53",
+
+storageBucket: "date-site-bfb53.firebasestorage.app",
+
+messagingSenderId: "305849379339",
+
+appId: "1:305849379339:web:ded141e65eae95ec31f50e"
+
+};
+
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+const status =
+document.getElementById("status");
+
+
+
+onSnapshot(
+doc(db,"adventures","latest"),
+(snapshot)=>{
+
+
+if(snapshot.exists()){
+
+
+const data = snapshot.data();
+
+
+
+status.innerHTML = `
+
+💗 HE SAID YES!! 🌸
+
+<br><br>
+
+${data.message}
+
+<br><br>
+
+📅 ${data.date || "No date saved"}
+
+<br>
+
+⏰ ${data.adventureTime || data.time || "No time saved"}
+
+<br><br>
+
+🌿 Plans:
+
+<br>
+
+${data.plans || "No plans saved"}
+
+`;
+
+}
+
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>
