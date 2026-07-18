@@ -38,11 +38,12 @@ window.yesClicked = function(){
 
 // NO BUTTON
 
+let noCount = 0;
+
+
 document.addEventListener("DOMContentLoaded", function(){
 
-
-    const noButton =
-    document.getElementById("noButton");
+    const noButton = document.getElementById("noButton");
 
 
     if(noButton){
@@ -84,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
                 noButton.onclick =
-                yesClicked;
+                window.yesClicked;
 
 
             }
