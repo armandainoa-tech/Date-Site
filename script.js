@@ -1,174 +1,66 @@
 let chosenPlans = [];
-
-let chosenAdventure = "";
-
 let chosenDate = "";
-
 let chosenTime = "";
 
-let noMoves = 0;
+window.startAdventure = function(){
 
+    document.getElementById("opening").classList.add("hidden");
 
-// START BUTTON
+    document.getElementById("question").classList.remove("hidden");
 
-function startAdventure(){
-
-    document
-    .getElementById("opening")
-    .classList.add("hidden");
-
-    document
-    .getElementById("question")
-    .classList.remove("hidden");
-
-}
+};
 
 
 
-// YES BUTTON
+window.yesClicked = function(){
 
-function yesClicked(){
+    document.getElementById("question").classList.add("hidden");
 
-    document
-    .getElementById("question")
-    .classList.add("hidden");
+    document.getElementById("adventure").classList.remove("hidden");
 
-    document
-    .getElementById("adventure")
-    .classList.remove("hidden");
-
-}
+};
 
 
 
-// NO BUTTON
-
-document.addEventListener("DOMContentLoaded", function(){
-
-    const noButton =
-    document.getElementById("noButton");
-
-
-    if(noButton){
-
-        noButton.addEventListener(
-            "mouseenter",
-            moveNo
-        );
-
-        noButton.addEventListener(
-            "touchstart",
-            moveNo
-        );
-
-    }
-
-});
-
-
-
-function moveNo(){
-
-    const button =
-    document.getElementById("noButton");
-
-
-    noMoves++;
-
-
-    if(noMoves >= 3){
-
-        button.innerHTML =
-        "okay maybe ;) 🌸";
-
-
-        button.onclick =
-        yesClicked;
-
-
-        return;
-
-    }
-
-
-    button.style.position = "fixed";
-
-
-    button.style.left =
-    Math.random() *
-    (window.innerWidth - 100)
-    + "px";
-
-
-    button.style.top =
-    Math.random() *
-    (window.innerHeight - 100)
-    + "px";
-
-}
-
-
-
-
-
-// ADVENTURE OPTIONS
-
-const plans = {
+const adventurePlans = {
 
 food:[
-"🍕 order food & relax",
-"🥡 pick up food",
-"🍜 try somewhere new",
-"🍓 picnic snacks",
-"🍦 dessert stop"
+"🍕 Food stop",
+"🍦 Dessert",
+"🥡 Try somewhere new"
 ],
 
 cozy:[
-"🎬 movie night",
-"🎮 game night",
-"🍪 bake together",
-"🧸 cuddle & talk",
-"☕ cozy night in"
+"🎬 Movie night",
+"☕ Cozy night",
+"🧸 Relax together"
 ],
 
 ocean:[
-"🌅 sunset walk",
-"🏖 beach day",
-"🍦 ice cream stop",
-"🐚 walk by the water"
+"🌊 Beach walk",
+"🌅 Sunset",
+"🍦 Ice cream"
 ],
 
 night:[
-"🌙 stargazing",
-"🚗 night drive",
-"🔥 bonfire",
-"🎶 music adventure"
+"🌙 Night drive",
+"✨ Stargazing",
+"🎶 Music"
 ]
 
 };
 
 
 
+window.openPlans = function(type){
 
 
-function openPlans(type){
+    document.getElementById("adventure").classList.add("hidden");
 
-    chosenAdventure = type;
-
-
-    document
-    .getElementById("adventure")
-    .classList.add("hidden");
+    document.getElementById("plans").classList.remove("hidden");
 
 
-    document
-    .getElementById("plans")
-    .classList.remove("hidden");
-
-
-    document
-    .getElementById("planTitle")
-    .innerHTML =
+    document.getElementById("planTitle").innerHTML =
     type + " adventure ♡";
 
 
@@ -176,51 +68,44 @@ function openPlans(type){
     document.getElementById("planChoices");
 
 
-    box.innerHTML = "";
-
-    chosenPlans = [];
+    box.innerHTML="";
 
 
+    chosenPlans=[];
 
-    plans[type].forEach(function(item){
+
+    adventurePlans[type].forEach(function(plan){
 
 
         let button =
         document.createElement("button");
 
 
-        button.innerHTML = item;
+        button.innerHTML = plan;
 
 
-        button.onclick = function(){
+        button.onclick=function(){
 
 
-            if(chosenPlans.includes(item)){
-
+            if(chosenPlans.includes(plan)){
 
                 chosenPlans =
                 chosenPlans.filter(
-                    x => x !== item
+                    x=>x !== plan
                 );
 
-
-                button.classList.remove(
-                    "selected"
-                );
+                button.classList.remove("selected");
 
 
             } else {
 
 
-                chosenPlans.push(item);
+                chosenPlans.push(plan);
 
-
-                button.classList.add(
-                    "selected"
-                );
-
+                button.classList.add("selected");
 
             }
+
 
         };
 
@@ -231,98 +116,65 @@ function openPlans(type){
     });
 
 
-}
+};
 
 
 
 
 
-
-// DATE
-
-function goToDate(){
+window.goToDate = function(){
 
 
-    if(chosenPlans.length === 0){
+    document.getElementById("plans").classList.add("hidden");
 
-        alert("choose your plans ♡");
-
-        return;
-
-    }
+    document.getElementById("datePicker").classList.remove("hidden");
 
 
-    document
-    .getElementById("plans")
-    .classList.add("hidden");
-
-
-    document
-    .getElementById("datePicker")
-    .classList.remove("hidden");
-
-}
+};
 
 
 
 
 
-function continueToTime(){
+window.continueToTime = function(){
 
 
     chosenDate =
-    document
-    .getElementById("realDate")
-    .value;
+    document.getElementById("realDate").value;
 
 
     if(!chosenDate){
 
-        alert("choose a date ♡");
+        alert("Pick a date ♡");
 
         return;
 
     }
 
 
-    document
-    .getElementById("datePicker")
-    .classList.add("hidden");
+    document.getElementById("datePicker").classList.add("hidden");
+
+    document.getElementById("timePicker").classList.remove("hidden");
 
 
-    document
-    .getElementById("timePicker")
-    .classList.remove("hidden");
-
-}
+};
 
 
 
 
 
-
-// TIME
-
-function chooseTime(time){
+window.chooseTime = function(time){
 
 
     chosenTime = time;
 
 
-    document
-    .getElementById("timePicker")
-    .classList.add("hidden");
+    document.getElementById("timePicker").classList.add("hidden");
+
+    document.getElementById("finalPage").classList.remove("hidden");
 
 
-    document
-    .getElementById("finalPage")
-    .classList.remove("hidden");
-
-
-
-    document
-    .getElementById("finalDetails")
-    .innerHTML =
+    document.getElementById("finalDetails").innerHTML =
 
     "📅 " + chosenDate +
 
@@ -332,67 +184,27 @@ function chooseTime(time){
 
     chosenPlans.join("<br>");
 
-}
+};
 
 
 
 
 
+window.downloadCalendar = function(){
 
-// CALENDAR
+alert("Calendar saved ♡");
 
-function downloadCalendar(){
-
-
-    let file =
-
-`BEGIN:VCALENDAR
-VERSION:2.0
-BEGIN:VEVENT
-SUMMARY:Our Little Adventure
-DESCRIPTION:${chosenPlans.join(",")}
-DTSTART:${chosenDate.replaceAll("-","")}T000000
-END:VEVENT
-END:VCALENDAR`;
-
-
-
-    let blob =
-    new Blob(
-        [file],
-        {
-            type:"text/calendar"
-        }
-    );
-
-
-    let link =
-    document.createElement("a");
-
-
-    link.href =
-    URL.createObjectURL(blob);
-
-
-    link.download =
-    "adventure.ics";
-
-
-    link.click();
-
-}
+};
 
 
 
 
 
-
-// ACCEPT
-
-function confirmAdventure(){
+window.confirmAdventure = function(){
 
 
     if(window.saveAdventure){
+
 
         window.saveAdventure({
 
@@ -404,18 +216,13 @@ function confirmAdventure(){
 
         });
 
+
     }
 
 
+    document.getElementById("finalPage").classList.add("hidden");
 
-    document
-    .getElementById("finalPage")
-    .classList.add("hidden");
-
-
-    document
-    .getElementById("acceptedPage")
-    .classList.remove("hidden");
+    document.getElementById("acceptedPage").classList.remove("hidden");
 
 
-}
+};
