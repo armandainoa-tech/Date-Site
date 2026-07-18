@@ -7,6 +7,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 
+
 const firebaseConfig = {
 
   apiKey: "AIzaSyBBzTwMmhD1t-gZeX5W35K1aG2okrUo91o",
@@ -31,37 +32,74 @@ const db = getFirestore(app);
 
 
 
+
+
 export async function saveAdventure(details){
 
 
-  await setDoc(
-
-    doc(db,"adventures","latest"),
-
-    {
-
-      accepted: true,
-
-      message:
-      "Your little adventure was accepted ♡",
-
-      date:
-      details.date,
-
-      adventureTime:
-      details.time,
-
-      plans:
-      details.plans,
-
-      time:
-      new Date().toISOString()
-
-    }
-
-  );
+  try {
 
 
-  console.log("saved ♡");
+    await setDoc(
+
+      doc(db,"adventures","latest"),
+
+      {
+
+        accepted: true,
+
+
+        message:
+        details.message || 
+        "HE SAID YES!! 🌸",
+
+
+
+        date:
+        details.date || 
+        "No date saved",
+
+
+
+        adventureTime:
+        details.adventureTime || details.time || 
+        "No time saved",
+
+
+
+        time:
+        details.time || details.adventureTime || 
+        "No time saved",
+
+
+
+        plans:
+        details.plans || 
+        "No plans saved",
+
+
+
+        updated:
+        new Date().toISOString()
+
+      }
+
+    );
+
+
+    console.log("Adventure saved ♡");
+
+
+  } catch(error){
+
+
+    console.error(
+      "Firebase save failed:",
+      error
+    );
+
+
+  }
+
 
 }

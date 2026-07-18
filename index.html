@@ -47,8 +47,6 @@
 
 
 
-<!-- START -->
-
 <section id="opening" class="screen">
 
 <div class="card">
@@ -76,8 +74,6 @@ i made something special for you
 
 
 
-
-<!-- QUESTION -->
 
 <section id="question" class="screen hidden">
 
@@ -124,7 +120,10 @@ a little adventure with me? ♡
 </div>
 
 </section>
-<!-- ADVENTURE -->
+
+
+
+
 
 <section id="adventure" class="screen hidden">
 
@@ -186,8 +185,6 @@ choose our little adventure ♡
 
 
 
-<!-- PLANS -->
-
 <section id="plans" class="screen hidden">
 
 <div class="card">
@@ -222,8 +219,6 @@ choose your favorite moments ♡
 
 
 
-
-<!-- DATE -->
 
 <section id="datePicker" class="screen hidden">
 
@@ -263,8 +258,6 @@ choose a date 🌸
 
 
 
-<!-- TIME -->
-
 <section id="timePicker" class="screen hidden">
 
 <div class="card">
@@ -285,51 +278,37 @@ pick a time 🌙
 
 
 <button onclick="chooseTime('6:30 PM')">
-
 🌅 6:30 PM
-
 </button>
 
 
 <button onclick="chooseTime('7:00 PM')">
-
 🌙 7:00 PM
-
 </button>
 
 
 <button onclick="chooseTime('7:30 PM')">
-
 ⭐ 7:30 PM
-
 </button>
 
 
 <button onclick="chooseTime('8:00 PM')">
-
 ✨ 8:00 PM
-
 </button>
 
 
 <button onclick="chooseTime('8:30 PM')">
-
 🌌 8:30 PM
-
 </button>
 
 
 <button onclick="chooseTime('9:00 PM')">
-
 🌃 9:00 PM
-
 </button>
 
 
 <button onclick="chooseTime('9:30 PM')">
-
 🌙 9:30 PM
-
 </button>
 
 
@@ -339,7 +318,13 @@ pick a time 🌙
 </div>
 
 </section>
-<!-- FINAL INVITATION -->
+
+
+
+
+
+
+
 
 <section id="finalPage" class="screen hidden">
 
@@ -422,8 +407,6 @@ i'll bring the adventure ✨
 
 
 
-<!-- ACCEPTED ENDING -->
-
 <section id="acceptedPage" class="screen hidden">
 
 
@@ -474,12 +457,33 @@ i can't wait to make this memory with you ♡
 
 
 </section>
+
+
 </div>
 
 
 
-<script src="script.js"></script>
 
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+
+<script>
+
+emailjs.init({
+
+    publicKey: "j5hvrNCMFnB_AUKLb"
+
+});
+
+</script>
+
+
+
+
+
+<!-- FIREBASE -->
 
 <script type="module">
 
@@ -490,5 +494,15 @@ window.saveAdventure = saveAdventure;
 </script>
 
 
+
+
+
+<!-- WEBSITE SCRIPT -->
+
+<script src="script.js"></script>
+
+
+
 </body>
+
 </html>

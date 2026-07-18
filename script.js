@@ -5,6 +5,7 @@ let chosenTime = "";
 let noCount = 0;
 
 
+// START ADVENTURE
 
 window.startAdventure = function(){
 
@@ -22,6 +23,7 @@ window.startAdventure = function(){
 
 
 
+// YES BUTTON
 
 window.yesClicked = function(){
 
@@ -35,7 +37,6 @@ window.yesClicked = function(){
     .classList.remove("hidden");
 
 };
-
 
 
 
@@ -365,41 +366,87 @@ window.chooseTime = function(time){
 
 
 
+// CALENDAR
+
 window.downloadCalendar = function(){
+
 
     if(!chosenDate || !chosenTime){
 
         alert("Please choose a date and time first ♡");
+
         return;
 
     }
 
-    const match = chosenTime.match(/(\d+):(\d+)\s(AM|PM)/);
 
-    let hour = parseInt(match[1],10);
-    const minute = parseInt(match[2],10);
+    const match =
+    chosenTime.match(/(\d+):(\d+)\s(AM|PM)/);
+
+
+
+    let hour =
+    parseInt(match[1],10);
+
+
+
+    const minute =
+    parseInt(match[2],10);
+
+
 
     if(match[3] === "PM" && hour !== 12){
+
         hour += 12;
+
     }
+
 
     if(match[3] === "AM" && hour === 12){
+
         hour = 0;
+
     }
 
-    const start = new Date(chosenDate);
-    start.setHours(hour, minute, 0);
 
-    const end = new Date(start);
-    end.setHours(end.getHours() + 1);
+
+    const start =
+    new Date(chosenDate);
+
+
+    start.setHours(
+        hour,
+        minute,
+        0
+    );
+
+
+
+    const end =
+    new Date(start);
+
+
+
+    end.setHours(
+        end.getHours()+1
+    );
+
+
+
+
 
     function formatDate(date){
 
         return date.toISOString()
-            .replace(/[-:]/g,"")
-            .split(".")[0] + "Z";
+        .replace(/[-:]/g,"")
+        .split(".")[0]+"Z";
 
     }
+
+
+
+
+
 
     const ics =
 `BEGIN:VCALENDAR
@@ -415,19 +462,46 @@ DESCRIPTION:${chosenPlans.join(", ")}
 END:VEVENT
 END:VCALENDAR`;
 
-    const blob = new Blob([ics],{
-        type:"text/calendar;charset=utf-8"
-    });
 
-    const url = URL.createObjectURL(blob);
 
-    const link = document.createElement("a");
+
+    const blob =
+    new Blob(
+        [ics],
+        {
+            type:"text/calendar;charset=utf-8"
+        }
+    );
+
+
+
+    const url =
+    URL.createObjectURL(blob);
+
+
+
+    const link =
+    document.createElement("a");
+
+
+
     link.href = url;
-    link.download = "Our-Little-Adventure.ics";
+
+
+    link.download =
+    "Our-Little-Adventure.ics";
+
+
 
     document.body.appendChild(link);
+
+
     link.click();
+
+
     document.body.removeChild(link);
+
+
 
     URL.revokeObjectURL(url);
 
@@ -440,25 +514,90 @@ END:VCALENDAR`;
 
 
 
+// CONFIRM ADVENTURE + EMAILJS
 
 window.confirmAdventure = function(){
 
 
+    const adventureData = {
+
+
+        message:
+        "HE SAID YES!! 🌸",
+
+
+        date:
+        chosenDate,
+
+
+        time:
+        chosenTime,
+
+
+        adventureTime:
+        chosenTime,
+
+
+        plans:
+        chosenPlans.join(", ")
+
+
+    };
+
+
+
+
+    // FIREBASE SAVE
+
     if(window.saveAdventure){
 
 
-        window.saveAdventure({
-
-            date: chosenDate,
-
-            time: chosenTime,
-
-            plans: chosenPlans.join(", ")
-
-        });
+        window.saveAdventure(adventureData);
 
 
     }
+
+
+
+
+
+    // EMAILJS SEND
+
+    emailjs.send(
+
+        "service_msyya77",
+
+        "template_z217jfy",
+
+        adventureData
+
+    )
+
+
+    .then(function(){
+
+
+        console.log(
+            "Email sent successfully 💗"
+        );
+
+
+    })
+
+
+    .catch(function(error){
+
+
+        console.log(
+            "Email failed:",
+            error
+        );
+
+
+    });
+
+
+
 
 
 
@@ -472,7 +611,10 @@ window.confirmAdventure = function(){
     .getElementById("acceptedPage")
     .classList.remove("hidden");
 
-
 };
 
-alert
+
+
+
+
+console.log("Date Site script running 💗");
