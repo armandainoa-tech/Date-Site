@@ -376,7 +376,11 @@ window.downloadCalendar = function(){
     }
 
 
-    let date = chosenDate.replaceAll("-", "");
+    let dateParts = chosenDate.split("-");
+
+    let year = dateParts[0];
+    let month = dateParts[1];
+    let day = dateParts[2];
 
 
     let timeMatch = chosenTime.match(/(\d+):(\d+)\s(AM|PM)/);
@@ -400,39 +404,49 @@ window.downloadCalendar = function(){
     }
 
 
-    let start =
-    date +
+    let startTime =
+    year +
+    month +
+    day +
     "T" +
     String(hour).padStart(2,"0") +
     String(minute).padStart(2,"0") +
     "00";
 
 
-    let end =
-    date +
+    let endHour = hour + 1;
+
+
+    let endTime =
+    year +
+    month +
+    day +
     "T" +
-    String(hour + 1).padStart(2,"0") +
+    String(endHour).padStart(2,"0") +
     String(minute).padStart(2,"0") +
     "00";
 
 
 
-    let calendar =
+    let event =
 
 `BEGIN:VCALENDAR
 VERSION:2.0
+PRODID:-//A Little Adventure//EN
 BEGIN:VEVENT
+UID:${Date.now()}@littleadventure
+DTSTAMP:${startTime}
+DTSTART:${startTime}
+DTEND:${endTime}
 SUMMARY:Our Little Adventure ♡
 DESCRIPTION:${chosenPlans.join(", ")}
-DTSTART:${start}
-DTEND:${end}
 END:VEVENT
 END:VCALENDAR`;
 
 
 
     let blob = new Blob(
-        [calendar],
+        [event],
         {
             type:"text/calendar;charset=utf-8"
         }
@@ -443,27 +457,7 @@ END:VCALENDAR`;
     URL.createObjectURL(blob);
 
 
-    let link =
-    document.createElement("a");
-
-
-    link.href = url;
-
-
-    link.download =
-    "our-little-adventure.ics";
-
-
-    document.body.appendChild(link);
-
-
-    link.click();
-
-
-    document.body.removeChild(link);
-
-
-    alert("Calendar saved ♡");
+    window.location.href = url;
 
 };
 
